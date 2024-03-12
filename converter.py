@@ -20,7 +20,7 @@ async def async_converter(from_currency:str, to_currencies:str, value: float):
         json_key = f'{from_currency}{to_currencies}'.upper()
         ask = float(data[json_key]['ask'])
         bid = float(data[json_key]['bid'])
-        #cotacao_data = data['create_date']
+        cotacao_data = data[json_key]['create_date']
         total_ask = ask * value
         total_bid = bid * value
     
@@ -28,4 +28,4 @@ async def async_converter(from_currency:str, to_currencies:str, value: float):
         print('---'*10)
         print(ex)
 
-    return {'Cotacao_de_para': f'{from_currency}-{to_currencies}', 'Ask': ask, 'Bid': bid, 'Total_ask': total_ask, 'Total_bid': total_bid}
+    return {'Cotacao_de_para': data[json_key]['name'], 'Ask': ask, 'Bid': bid, 'Total_ask': total_ask, 'Total_bid': total_bid, 'Data_cotacao': cotacao_data}
